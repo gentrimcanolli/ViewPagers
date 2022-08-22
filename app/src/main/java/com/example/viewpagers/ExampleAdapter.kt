@@ -7,7 +7,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 
-class ExampleAdapter(val contentList: MutableList<ImageItem>) :
+class ExampleAdapter(private val contentList: MutableList<ImageItem>) :
     RecyclerView.Adapter<ExampleAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {

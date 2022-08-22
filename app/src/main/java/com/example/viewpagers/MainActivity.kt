@@ -13,6 +13,8 @@ import android.media.Image
 class MainActivity : AppCompatActivity() {
     lateinit var viewPager2: ViewPager2
     lateinit var pageNumberTv: TextView
+    val argbEvaluator = ArgbEvaluator()
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,10 +25,10 @@ class MainActivity : AppCompatActivity() {
         pageNumberTv = findViewById(R.id.page_number_tv)
 
         val list = mutableListOf(
-            ImageItem("https://cdn.britannica.com/18/114418-004-2A12F087/Flag-Kosovo.jpg"),
-            ImageItem("https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Flag_of_Albania.svg/800px-Flag_of_Albania.svg.png?20190303164713"),
-            ImageItem("https://www.pngall.com/wp-content/uploads/2016/06/Germany-Flag.png"),
-            ImageItem("https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Flag_of_Nigeria.svg/1280px-Flag_of_Nigeria.svg.png")
+            ImageItem("https://cdn.britannica.com/18/114418-004-2A12F087/Flag-Kosovo.jpg", getColor(R.color.blue)),
+            ImageItem("https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Flag_of_Albania.svg/800px-Flag_of_Albania.svg.png?20190303164713",getColor(R.color.red)),
+            ImageItem("https://www.pngall.com/wp-content/uploads/2016/06/Germany-Flag.png", getColor(R.color.yellow)),
+            ImageItem("https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Flag_of_Nigeria.svg/1280px-Flag_of_Nigeria.svg.png", getColor(R.color.green))
         )
 
         val adapter = ExampleAdapter(list)
@@ -40,26 +42,21 @@ class MainActivity : AppCompatActivity() {
             ) {
                 super.onPageScrolled(position, positionOffset, positionOffsetPixels)
 
-                println("position: $position, positionOffset: $positionOffset, positionOffsetPixels: $positionOffsetPixels ")
-                val blueColor: Int = resources.getColor(R.color.blue)
-                val redColor: Int = resources.getColor(R.color.red)
-                val greenColor: Int = resources.getColor(R.color.green)
-                val yellowColor: Int = resources.getColor(R.color.yellow)
-
-                val colors = arrayOf(blueColor, redColor, yellowColor, greenColor)
-                val argbEvaluator = ArgbEvaluator()
+//                println("position: $position, positionOffset: $positionOffset, positionOffsetPixels: $positionOffsetPixels ")
 
 
-                if (position < (list.size - 1) && position < (colors.size - 1)) {
+
+
+                if (position < (list.size - 1)) {
                     viewPager2.setBackgroundColor(
                         (argbEvaluator.evaluate(
                             positionOffset,
-                            colors[position],
-                            colors[position + 1]
+                            list[position].color,
+                            list[position + 1].color
                         )).toString().toInt()
                     )
                 } else {
-                    viewPager2.setBackgroundColor(colors[colors.size - 1])
+                    viewPager2.setBackgroundColor(list[list.size - 1].color)
                 }
             }
 
