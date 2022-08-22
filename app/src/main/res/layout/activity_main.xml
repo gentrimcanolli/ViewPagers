@@ -11,20 +11,18 @@
         android:id="@+id/viewPager2"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/page_number_tv"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
-    <TextView
-        android:id="@+id/page_number_tv"
+    <LinearLayout
+        android:id="@+id/indicator_linear"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:textSize="30sp"
-        android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="15dp"
+        android:layout_margin="8dp"
+        app:layout_constraintBottom_toBottomOf="@id/viewPager2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="horizontal" />
 </androidx.constraintlayout.widget.ConstraintLayout>
